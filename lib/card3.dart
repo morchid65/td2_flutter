@@ -5,7 +5,7 @@ class Ecran3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     color: Colors.blueGray,
+     color: Colors.green,
      child: 
      const Center(child: Text('Ecran3'),
      )   

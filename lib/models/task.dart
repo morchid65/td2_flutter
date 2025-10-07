@@ -1,39 +1,38 @@
 import 'package:flutter/material.dart';
 
 class Task {
-  int id;
-  String title;
-  List<String> tags;
-  int nbhours;
-  int difficulty;
-  String description;
-  Color color;
+  final String id;
+  final String title;
+  final String description;
+  final int nbHours;
+  final int difficulty;
+  final List<String> tags;
+  final Color color;
+  final List<String> task;
 
   Task({
     required this.id,
     required this.title,
-    required this.tags,
-    required this.nbhours,
-    required this.difficulty,
     required this.description,
+    required this.nbHours,
+    required this.difficulty,
+    required this.tags,
     required this.color,
+    required this.task,
   });
 
-  static List<Task> generateTask(int i) {
-    List<Task> tasks = [];
-    for (int n = 0; n < i; n++) {
-      tasks.add(
-        Task(
-          id: n,
-          title: "title $n",
-          tags: ['tag $n', 'tag${n + 1}'],
-          nbhours: n,
-          difficulty: n,
-          description: '$n',
-          color: Colors.lightBlue,
-        ),
+  static List<Task> generateTasks(int count) {
+    return List.generate(count, (index) {
+      return Task(
+        id: '$index',
+        title: 'Tâche $index',
+        description: 'Description de la tâche $index',
+        nbHours: 2 + index,
+        difficulty: (index % 5) + 1,
+        tags: ['tag${index + 1}', 'flutter'],
+        color: Colors.primaries[index % Colors.primaries.length],
+        task: ['Étape A', 'Étape B'],
       );
-    }
-    return tasks;
+    });
   }
 }

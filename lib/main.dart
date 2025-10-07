@@ -1,19 +1,43 @@
 import 'package:flutter/material.dart';
-import 'mytheme.dart';
-import 'home.dart';
+import 'card1.dart';
 
 void main() {
-  runApp(MyTD2App());
+  runApp(const MyApp());
 }
 
-class MyTD2App extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final theme = MyTheme.dark();
     return MaterialApp(
-      theme: theme,
-      title: 'TD2',
-      home: Home(),
+      title: 'Gestion des tâches',
+      theme: ThemeData(
+        scaffoldBackgroundColor: const Color(800000), 
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(800000),
+          foregroundColor: Colors.white,
+        ),
+        cardColor: const Color(800000), 
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.white),
+          titleLarge: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Mes tâches')),
+      body: Ecran1(),
     );
   }
 }

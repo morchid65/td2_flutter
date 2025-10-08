@@ -36,3 +36,28 @@ class Task {
     });
   }
 }
+
+static Task fromJson(Map<String, dynamic> json) {
+    final tags = <String>[];
+    final Color clr ;
+
+    clr = Colors.greenAccent;
+
+    if (json['tags'] != null) {
+      json['tags'].forEach((t) {
+        tags.add(t);
+      });
+    }
+}
+
+return Task(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      nbHours: json['nbHours'],
+      difficulty: json['difficulty'],
+      tags: tags,
+      color: clr,
+      task: List<String>.from(json['task'] ?? []),
+    );
+

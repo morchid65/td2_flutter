@@ -1,63 +1,57 @@
 import 'package:flutter/material.dart';
 
 class Task {
-  final String id;
-  final String title;
-  final String description;
-  final int nbHours;
-  final int difficulty;
-  final List<String> tags;
-  final Color color;
-  final List<String> task;
+  int id;
+  String title;
+  List<String> tags;
+  int nbhours;
+  int difficulty;
+  String description;
+  Color color;
 
   Task({
     required this.id,
     required this.title,
-    required this.description,
-    required this.nbHours,
-    required this.difficulty,
     required this.tags,
+    required this.nbhours,
+    required this.difficulty,
+    required this.description,
     required this.color,
-    required this.task,
   });
 
-  static List<Task> generateTasks(int count) {
-    return List.generate(count, (index) {
-      return Task(
-        id: '$index',
-        title: 'Tâche $index',
-        description: 'Description de la tâche $index',
-        nbHours: 2 + index,
-        difficulty: (index % 5) + 1,
-        tags: ['tag${index + 1}', 'flutter'],
-        color: Colors.primaries[index % Colors.primaries.length],
-        task: ['Étape A', 'Étape B'],
+  static List<Task> generateTask(int i) {
+    List<Task> tasks = [];
+    for (int n = 0; n < i; n++) {
+      tasks.add(
+        Task(
+          id: n,
+          title: "title $n",
+          tags: ['tag $n', 'tag${n + 1}'],
+          nbhours: n,
+          difficulty: n,
+          description: '$n',
+          color: Colors.lightBlue,
+        ),
       );
-    });
+    }
+    return tasks;
   }
-}
 
 static Task fromJson(Map<String, dynamic> json) {
-    final tags = <String>[];
-    final Color clr ;
+    final tags =
+        (json['tags'] as List?)?.map((e) => e.toString()).toList() ?? [];
 
-    clr = Colors.greenAccent;
-
-    if (json['tags'] != null) {
-      json['tags'].forEach((t) {
-        tags.add(t);
-      });
-    }
-}
-
-return Task(
+    return Task(
       id: json['id'],
       title: json['title'],
-      description: json['description'],
-      nbHours: json['nbHours'],
-      difficulty: json['difficulty'],
       tags: tags,
-      color: clr,
-      task: List<String>.from(json['task'] ?? []),
+      nbhours: json['nbhours'],
+      difficulty: json['difficulty'],
+      description: json['description'],
+      color: json['color'] != null
+          ? Color(int.parse(json['color'], radix: 16))
+          : Colors.greenAccent,
     );
+  }
 
+}

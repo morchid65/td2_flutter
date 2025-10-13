@@ -32,7 +32,7 @@ class Detail extends StatelessWidget {
                 Card(
                   child: ListTile(
                     title: const Text('Heures'),
-                    subtitle: Text('${task.nbHours}'),
+                    subtitle: Text('${task.nbhours}'),
                   ),
                 ),
                 Card(
@@ -61,7 +61,7 @@ class Detail extends StatelessWidget {
                   child: Text(myTask.title[0]),
                 ),
                 title: Text(myTask.title),
-                subtitle: Text(myTask.task.join(", ")),
+                subtitle: Text(myTask.tags.join(", ")),
                 trailing: IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {},

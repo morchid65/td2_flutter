@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '/models/task.dart';
+import '../models/task.dart';
 import 'detail.dart';
 
 class Ecran1 extends StatelessWidget {
-  final List<Task> myTasks = Task.generateTask(6); // ✅ méthode corrigée
+  final List<Task> myTasks = Task.generateTask(6);
 
   Ecran1({super.key});
 
@@ -19,7 +19,7 @@ class Ecran1 extends StatelessWidget {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.lightBlue,
-              child: Text('${myTasks[index].id}'), // ✅ conversion en String
+              child: Text(myTasks[index].id.toString()),
             ),
             title: Text(myTasks[index].title),
             subtitle: Text(myTasks[index].tags.join(" ")),
@@ -29,10 +29,8 @@ class Ecran1 extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Detail(
-                      task: myTasks[index],
-                      myTasks: myTasks,
-                    ),
+                    builder: (context) 
+                    => Detail(task: myTasks[index]),
                   ),
                 );
               },

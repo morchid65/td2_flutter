@@ -1,24 +1,24 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter/material.dart'; 
+import '../models/task.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/task.dart';
-
 class MyAPI {
-  Future<List<Task>> getTasks() async { // asynchrone repond sans savoir quand (liste de tache) tag a5 sinon await force attente de 1 seconde
-    await Future.delayed(Duration(seconds: 1));
-    // on attend le chargement de task.json
-    final dataString = await _loadAsset('assets/json/tasks.json');
-    // on décode un fichier json en une map
-    final Map<String, dynamic> json = jsonDecode(dataString);
-    // json['tasks'] est une liste dynamique contenant des tasks trouvées dans le json
-    if (json['tasks'] != null) {
+  /* Pour écran n°2 basé sur la lecture du fichier JSON local**/
+  Future<List<Task>> getTasks() async {
+    // on attend une seconde
+    await Future.delayed(const Duration(seconds: 1));
+    // on attend le chargement de tasks.json
+    final dataString = await _loadAsset('assets/tasks.json');
+    // on decode un fichier json
+    final json = jsonDecode(dataString);
+    // json["tasks"] contient la liste des tasks trouvée dans le fichier
+    if (json.isNotEmpty) {
       final tasks = <Task>[];
-      // on boucle sur les taches
-      for (var element in json['tasks']) {
-        tasks.add(Task.fromJson(element)); 
-      }
+      // on boucle sur les tâches
+      json["tasks"].forEach((element) {
+        tasks.add(Task.fromJson(element));
+      });
       return tasks;
     } else {
       return [];
@@ -29,18 +29,3 @@ class MyAPI {
     return rootBundle.loadString(path);
   }
 }
-
-Task createNewTask(int nb) {
-  return Task(
-    id: '$nb',
-    title: 'Tâche $nb',
-    description: 'Description de la tâche $nb',
-    nbHours: 2 + nb,
-    difficulty: (nb % 5) + 1,
-    tags: ['tag${nb + 1}', 'flutter'],
-    color: Colors.primaries[nb % Colors.primaries.length],
-    task: ['Étape A', 'Étape B'],
-  );
-}
-
-// js = promesse et Dart = Future

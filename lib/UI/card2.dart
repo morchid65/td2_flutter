@@ -1,71 +1,58 @@
+import '../api/myapi.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
-import 'models/task.dart';
 
-class Ecran2 extends StatefulWidget {
-  @override
-  _Ecran2State createState() => _Ecran2State();
-}
+import 'detail.dart';
 
-class _Ecran2State extends State<Ecran2> {
-  late Future<List<Task>> _tasksFuture;
+class Ecran2 extends StatelessWidget {
+  final MyAPI myAPI = MyAPI();
 
-  @override
-  void initState() {
-    super.initState();
-    _tasksFuture = loadTasks();
-  }
-
-Future<List<Task>> loadTasks() async {
-    // Lire le fichier
-    final String jsonString = await rootBundle.loadString('assets/tasks.json');
-
-    // Décoder en Map<String,dynamic>
-    final Map<String, dynamic> jsonData = json.decode(jsonString);
-
-    // Extraire la liste des tâches
-    final List<dynamic> tasksList = jsonData['tasks'];
-
-    // Transformer chaque élément en Task
-    return tasksList.map((e) => Task.fromJson(e)).toList();
-  }
-
+  Ecran2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Task>>(
-      future: _tasksFuture,
+    return FutureBuilder(
+      future: myAPI.getTasks(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState != ConnectionState.done &&
+            !snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Erreur: ${snapshot.error}'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('Aucune tâche trouvée'));
         }
-        final tasks = snapshot.data!;
-        return ListView.builder(
-          itemCount: tasks.length,
-          itemBuilder: (context, index) {
-            final task = tasks[index];
-            return Card(
-              color: task.color.withOpacity(0.2),
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: ListTile(
-                title: Text(task.title),
-                subtitle: Text(
-                  '${task.nbhours}h • Difficulté ${task.difficulty}',
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
+        if (snapshot.data != null) {
+          return ListView.builder(
+            itemCount: snapshot.data?.length ?? 0,
+            itemBuilder: (BuildContext context, index) {
+              return Card(
+                color: Colors.white,
+                elevation: 7,
+                margin: const EdgeInsets.all(10),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.greenAccent,
+                    child: Text(snapshot.data?[index].id.toString() ?? ""),
+                  ),
+                  title: Text(snapshot.data?[index].title ?? ""),
+                  subtitle: Text(snapshot.data?[index].tags.join(" ") ?? ""),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              Detail(task: snapshot.data![index]),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                trailing: Wrap(
-                  spacing: 8,
-                  children: task.tags.map((t) => Chip(label: Text(t))).toList(),
-                ),
-              ),
-            );
-          },
-        );
+              );
+            },
+          );
+        }
+        return Container();
       },
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import '/ViewModel/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      home: Home(), // ✅ corrigé ici
+      home: Home(), 
     );
   }
 }

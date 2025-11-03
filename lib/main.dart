@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import '/ViewModel/home.dart';
+import 'package:provider/provider.dart';
+import 'ViewModel/setting_view_model.dart';
+import 'mytheme.dart';
+import 'home.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyTD2());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyTD2 extends StatelessWidget {
+  const MyTD2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Gestion des tâches',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xFF800000),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Color(0xFF800000),
-          foregroundColor: Colors.white,
-        ),
-        cardColor: Color(0xFF800000),
-        textTheme: TextTheme(
-          bodyMedium: TextStyle(color: Colors.white),
-          titleLarge: TextStyle(color: Colors.white),
-        ),
-        iconTheme: IconThemeData(color: Colors.white),
+    return ChangeNotifierProvider(
+      create: (_) => SettingViewModel(),
+      child: Consumer<SettingViewModel>(
+        builder: (context, notifier, child) {
+          return MaterialApp(
+            theme: notifier.isDark ? MyTheme.dark() : MyTheme.light(),
+            title: 'TD2',
+            home: const Home(),
+          );
+        },
       ),
-      home: Home(), 
     );
   }
 }

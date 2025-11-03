@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyTheme {
-  // 1
   static TextTheme lightTextTheme = TextTheme(
     bodyLarge: GoogleFonts.openSans(
       fontSize: 14.0,
@@ -31,7 +30,6 @@ class MyTheme {
     ),
   );
 
-  // 2
   static TextTheme darkTextTheme = TextTheme(
     bodyLarge: GoogleFonts.openSans(
       fontSize: 14.0,
@@ -60,16 +58,11 @@ class MyTheme {
     ),
   );
 
-  // 3
   static ThemeData light() {
     return ThemeData(
       brightness: Brightness.light,
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateColor.resolveWith(
-              (states) {
-            return Colors.black;
-          },
-        ),
+        fillColor: MaterialStateColor.resolveWith((states) => Colors.black),
       ),
       appBarTheme: const AppBarTheme(
         foregroundColor: Colors.black,
@@ -82,14 +75,11 @@ class MyTheme {
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.black,
-
       ),
       textTheme: lightTextTheme,
-
     );
   }
 
-  // 4
   static ThemeData dark() {
     return ThemeData(
       brightness: Brightness.dark,
@@ -106,7 +96,6 @@ class MyTheme {
         unselectedItemColor: Colors.white,
       ),
       textTheme: darkTextTheme,
-
     );
   }
 }

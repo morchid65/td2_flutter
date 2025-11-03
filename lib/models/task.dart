@@ -37,7 +37,7 @@ class Task {
     return tasks;
   }
 
-static Task fromJson(Map<String, dynamic> json) {
+  static Task fromJson(Map<String, dynamic> json) {
     final tags =
         (json['tags'] as List?)?.map((e) => e.toString()).toList() ?? [];
 
@@ -49,9 +49,16 @@ static Task fromJson(Map<String, dynamic> json) {
       difficulty: json['difficulty'],
       description: json['description'],
       color: json['color'] != null
-          ? Color(int.parse(json['color'], radix: 16))
+          ? _parseColor(json['color'])
           : Colors.greenAccent,
     );
   }
 
+  static Color _parseColor(String colorString) {
+    colorString = colorString.replaceAll("#", "");
+    if (colorString.length == 6) {
+      colorString = "FF$colorString";
+    }
+    return Color(int.parse("0x$colorString"));
+  }
 }

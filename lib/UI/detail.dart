@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../models/task.dart';
 
 class Detail extends StatelessWidget {
@@ -11,74 +10,30 @@ class Detail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Task ${task.title} detail')),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            Card(
-              color: task.color,
-              elevation: 7,
-              margin: const EdgeInsets.all(10),
-              child: ListTile(
-                leading: (const Icon(Icons.key)),
-                title: const Text('Identifiant'),
-                subtitle: Text('${task.id}'),
-              ),
-            ),
-            Card(
-              color: task.color,
-              elevation: 7,
-              margin: const EdgeInsets.all(10),
-              child: ListTile(
-                leading: (const Icon(Icons.title)),
-                title: const Text('Titre de la tache'),
-                subtitle: Text(task.title),
-              ),
-            ),
-            Card(
-              color: task.color,
-              elevation: 7,
-              margin: const EdgeInsets.all(10),
-              child: ListTile(
-                leading: (const Icon(Icons.description)),
-                title: const Text('Description de la tache '),
-                subtitle: Text(task.description),
-              ),
-            ),
-
-            Card(
-              color: task.color,
-              elevation: 7,
-              margin: const EdgeInsets.all(10),
-              child: ListTile(
-                leading: (const Icon(Icons.attach_file)),
-                title: Text('Tags associés '),
-                subtitle: Text(task.tags.join(" ")),
-              ),
-            ),
-
-            Card(
-              color: task.color,
-              elevation: 7,
-              margin: const EdgeInsets.all(10),
-              child: ListTile(
-                leading: (const Icon(Icons.trending_up)),
-                title: const Text('Difficulté '),
-                subtitle: Text('${task.difficulty}'),
-              ),
-            ),
-
-            Card(
-              color: task.color,
-              elevation: 7,
-              margin: const EdgeInsets.all(10),
-              child: ListTile(
-                leading: (const Icon(Icons.schedule)),
-                title: const Text("Nombre d'heures "),
-                subtitle: Text('${task.nbhours}'),
-              ),
-            ),
+            _buildCard(Icons.key, 'Identifiant', '${task.id}'),
+            _buildCard(Icons.title, 'Titre de la tâche', task.title),
+            _buildCard(Icons.description, 'Description de la tâche', task.description),
+            _buildCard(Icons.attach_file, 'Tags associés', task.tags.join(" ")),
+            _buildCard(Icons.trending_up, 'Difficulté', '${task.difficulty}'),
+            _buildCard(Icons.schedule, "Nombre d'heures", '${task.nbhours}'),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildCard(IconData icon, String title, String subtitle) {
+    return Card(
+      color: task.color,
+      elevation: 7,
+      margin: const EdgeInsets.all(10),
+      child: ListTile(
+        leading: Icon(icon),
+        title: Text(title),
+        subtitle: Text(subtitle),
       ),
     );
   }

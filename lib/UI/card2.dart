@@ -1,6 +1,5 @@
-import '../api/myapi.dart';
 import 'package:flutter/material.dart';
-
+import '../api/myapi.dart';
 import 'detail.dart';
 
 class Ecran2 extends StatelessWidget {
@@ -13,46 +12,46 @@ class Ecran2 extends StatelessWidget {
     return FutureBuilder(
       future: myAPI.getTasks(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done &&
-            !snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          return Center(child: Text(snapshot.error.toString()));
+          return Center(child: Text('Erreur : ${snapshot.error}'));
         }
-        if (snapshot.data != null) {
-          return ListView.builder(
-            itemCount: snapshot.data?.length ?? 0,
-            itemBuilder: (BuildContext context, index) {
-              return Card(
-                color: Colors.white,
-                elevation: 7,
-                margin: const EdgeInsets.all(10),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.greenAccent,
-                    child: Text(snapshot.data?[index].id.toString() ?? ""),
-                  ),
-                  title: Text(snapshot.data?[index].title ?? ""),
-                  subtitle: Text(snapshot.data?[index].tags.join(" ") ?? ""),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              Detail(task: snapshot.data![index]),
-                        ),
-                      );
-                    },
-                  ),
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('Aucune tâche trouvée.'));
+        }
+
+        return ListView.builder(
+          itemCount: snapshot.data!.length,
+          itemBuilder: (context, index) {
+            final task = snapshot.data![index];
+            return Card(
+              color: Colors.white,
+              elevation: 7,
+              margin: const EdgeInsets.all(10),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.greenAccent,
+                  child: Text(task.id.toString()),
                 ),
-              );
-            },
-          );
-        }
-        return Container();
+                title: Text(task.title),
+                subtitle: Text(task.tags.join(" ")),
+                trailing: IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Detail(task: task),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+        );
       },
     );
   }

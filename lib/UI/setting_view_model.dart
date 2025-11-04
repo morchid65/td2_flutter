@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../repository/setting_repository.dart'; // à créer si pas encore fait
+import '../repository/setting_repository.dart'; 
 
 class SettingViewModel extends ChangeNotifier {
   late bool _isDark;

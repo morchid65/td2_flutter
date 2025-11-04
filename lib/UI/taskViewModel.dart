@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart'; // Pour ChangeNotifier
-import '../models/task.dart'; // Chemin corrigé selon ton architecture
+import '../modele/task.dart'; 
 
 class TaskViewModel extends ChangeNotifier {
   late List<Task> liste;

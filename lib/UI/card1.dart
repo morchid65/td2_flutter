@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/task.dart';
-import '../ViewModel/taskViewModel.dart';
-// import 'detail.dart'; // Assurez-vous d'avoir ce fichier
+// Imports absolus corrigés
+import 'package:td2_app/models/task.dart';
+import 'package:td2_app/ViewModel/taskViewModel.dart';
 
 class Ecran1 extends StatelessWidget {
   const Ecran1({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Récupération dynamique de la liste via Provider
     final tasks = context.watch<TaskViewModel>().liste;
 
     return ListView.builder(
@@ -30,7 +29,7 @@ class Ecran1 extends StatelessWidget {
             trailing: IconButton(
               icon: const Icon(Icons.edit),
               onPressed: () {
-                // Remplacer par la navigation vers Detail
+                // Navigation vers Detail (non implémenté ici, à décommenter si vous avez Detail)
                 /*
                 Navigator.push(
                   context,

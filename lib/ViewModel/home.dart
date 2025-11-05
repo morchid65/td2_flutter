@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'ecran1.dart';
-import 'ecran_settings.dart';
-import 'add_task.dart';
+import 'package:td2_app/UI/card1.dart';
+import 'package:td2_app/UI/ecran_settings.dart';
+import 'package:td2_app/UI/add_task.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

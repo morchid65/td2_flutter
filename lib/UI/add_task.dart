@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../ViewModel/taskViewModel.dart';
-import '../models/task.dart';
+import 'package:td2_app/ViewModel/taskViewModel.dart';
+import 'package:td2_app/models/task.dart';
 
 class AddTask extends StatelessWidget {
   @override

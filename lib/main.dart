@@ -32,7 +32,7 @@ class MyTD2 extends StatelessWidget {
           },
         )
       ],
-      // Retire const dans le Consumer pour éviter l'erreur G962A111C
+
       child: Consumer<SettingViewModel>(
         builder: (context, settingNotifier, child) {
           return MaterialApp(

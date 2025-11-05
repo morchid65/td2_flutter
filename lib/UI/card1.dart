@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// Imports absolus corrigés
 import 'package:td2_app/models/task.dart';
 import 'package:td2_app/ViewModel/taskViewModel.dart';
+import 'detail.dart';
 
 class Ecran1 extends StatelessWidget {
   const Ecran1({super.key});
@@ -29,15 +29,13 @@ class Ecran1 extends StatelessWidget {
             trailing: IconButton(
               icon: const Icon(Icons.edit),
               onPressed: () {
-                // Navigation vers Detail (non implémenté ici, à décommenter si vous avez Detail)
-                /*
+                
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Detail(task: task),
                   ),
                 );
-                */
               },
             ),
           ),

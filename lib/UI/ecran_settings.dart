@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
-// Imports absolus corrigés
 import 'package:td2_app/UI/mytheme.dart';
 import 'package:td2_app/ViewModel/setting_view_model.dart';
 

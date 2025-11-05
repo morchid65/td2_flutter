@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:td2_app/ViewModel/home.dart';
+import 'package:td2_app/ViewModel/home.dart'; 
 import 'package:td2_app/UI/mytheme.dart';
 import 'package:td2_app/ViewModel/setting_view_model.dart';
 import 'package:td2_app/ViewModel/taskViewModel.dart'; 
 
-void main() {
-  runApp(MyTD2()); // Retire le const ici
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'dart:io';
+// -------------------------------------------
+
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized(); 
+  
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    sqfliteFfiInit();
+
+    databaseFactory = databaseFactoryFfi;
+  }
+  // --------------------------------------------------------------------------
+  
+  runApp(MyTD2()); 
 }
 
 class MyTD2 extends StatelessWidget {
-  // Retire const ici
-  // const MyTD2({super.key}); 
   MyTD2({super.key});
 
   @override
@@ -27,7 +39,7 @@ class MyTD2 extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) {
             TaskViewModel taskViewModel = TaskViewModel();
-            taskViewModel.generateTasks();
+
             return taskViewModel;
           },
         )
@@ -37,7 +49,7 @@ class MyTD2 extends StatelessWidget {
         builder: (context, settingNotifier, child) {
           return MaterialApp(
             theme: settingNotifier.isDark ? MyTheme.dark() : MyTheme.light(),
-            title: 'TD3',
+            title: 'TD4 Task Manager',
             home: const Home(), 
           );
         },

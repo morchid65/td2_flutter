@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart'; // Assurez-vous d'avoir ce package si vous voulez utiliser firstWhereOrNull
 
 class Task {
-  static int nb = 0; 
+  static int nb = 0;
 
-  int id;
+  final int? id; // Rendu nullable pour la DB
   String title;
   List<String> tags;
   int nbhours;
@@ -12,7 +13,7 @@ class Task {
   Color color;
 
   Task({
-    required this.id,
+    this.id, // L'ID est géré par la DB
     required this.title,
     required this.tags,
     required this.nbhours,
@@ -20,28 +21,55 @@ class Task {
     required this.description,
     required this.color,
   });
+  
+  // --- NOUVELLES MÉTHODES POUR SQFLITE ---
 
-  factory Task.newTask() {
-    Task.nb++; 
+  // Convertit un objet Task en Map pour l'insertion/mise à jour DB
+  Map<String, dynamic> toMap() {
+    return {
+      // 'id': id, // Omettre l'ID pour l'insertion, le garder pour l'update
+      'title': title,
+      'tags': tags.join(','), // Convertir List<String> en String séparé par des virgules
+      'nbhours': nbhours,
+      'difficulty': difficulty,
+      'description': description,
+      'color': color.value, // Convertir Color en int
+      // Inclure l'ID seulement s'il existe pour la mise à jour
+      if (id != null) 'id': id, 
+    };
+  }
+
+  // Crée un objet Task à partir d'un Map (lecture DB)
+  factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
-        id: Task.nb,
-        title: 'title ${Task.nb}',
-        tags: ['tag ${Task.nb}', 'tag${Task.nb + 1}'],
-        nbhours: Task.nb,
-        difficulty: Task.nb % 5,
-        description: 'description ${Task.nb}',
-        color: Colors.lightBlue,
+      id: map['id'],
+      title: map['title'],
+      tags: (map['tags'] as String).split(','),
+      nbhours: map['nbhours'],
+      difficulty: map['difficulty'],
+      description: map['description'],
+      color: Color(map['color']),
     );
   }
 
-  static List<Task> generateTask(int count) {
-    if (Task.nb > 0) Task.nb = 0; 
-    return List.generate(count, (index) => Task.newTask());
-  }
+  // --- ANCIENNES MÉTHODES MISES À JOUR ---
 
+  // Ajusté pour ne plus attribuer l'ID manuellement
+  factory Task.newTask() {
+    Task.nb++; 
+    return Task(
+        title: 'Nouvelle Tâche',
+        tags: ['tag', 'auto'],
+        nbhours: 1,
+        difficulty: 1,
+        description: 'Description auto-générée.',
+        color: Colors.lightBlue,
+    );
+  }
+  
+  // Conserver fromJson pour la compatibilité avec l'API (TD2) si nécessaire
   static Task fromJson(Map<String, dynamic> json) {
-    final tags =
-        (json['tags'] as List?)?.map((e) => e.toString()).toList() ?? [];
+      final tags = (json['tags'] as List?)?.map((e) => e.toString()).toList() ?? [];
 
     return Task(
       id: json['id'],
@@ -50,17 +78,7 @@ class Task {
       nbhours: json['nbhours'],
       difficulty: json['difficulty'],
       description: json['description'],
-      color: json['color'] != null
-          ? _parseColor(json['color'])
-          : Colors.greenAccent,
+      color: Color(json['color'] is int ? json['color'] : Colors.lightBlue.value), 
     );
-  }
-
-  static Color _parseColor(String colorString) {
-    colorString = colorString.replaceAll("#", "");
-    if (colorString.length == 6) {
-      colorString = "FF$colorString";
-    }
-    return Color(int.parse("0x$colorString"));
   }
 }

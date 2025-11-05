@@ -53,11 +53,33 @@ Ce projet est une application de gestion de tâches développée en Flutter/Dart
 
 ## 🏗️ Structure du Code
 
-Voici l'arborescence des fichiers clés, organisée par responsabilités architecturales :
-'''
+Voici l'arborescence des fichiers clés, organisée par responsabilités architecturales. Cette structure reflète l'évolution du projet du TD2 au TD4 :
 
-. ├── lib/ │ ├── api/ │ │ └── myapi.dart # (TD2) Couche de données factice, lecture de 'assets/tasks.json'. │ ├── models/ │ │ └── task.dart # (TD2->TD4) Modèle métier avec méthodes de sérialisation (fromJson/toMap). │ ├── repository/ │ │ ├── settings_repository.dart # (TD3) Repository pour SharedPreferences (Thème). │ │ └── task_repository.dart # (TD4) Repository pour SQLite (CRUD des Tâches). │ ├── UI/ │ │ ├── card1.dart # (TD3->TD4) Affiche la liste des tâches (utilise TaskViewModel). │ │ ├── detail.dart # (TD2) Affiche les détails d'une tâche. │ │ ├── ecran_settings.dart # (TD3) Écran des paramètres (utilise SettingViewModel). │ │ ├── home.dart # (TD3->TD4) Contient la BottomNavigationBar et le FAB. │ │ ├── mytheme.dart # (TD3) Définition des thèmes Light et Dark. │ │ └── task_form_screen.dart # (TD4) Formulaire CRUD (Ajout/Édition). │ ├── ViewModel/ │ │ ├── setting_view_model.dart # (TD3) Logique métier et état du thème (ChangeNotifier). │ │ └── taskViewModel.dart # (TD3->TD4) Logique métier et état des tâches (ChangeNotifier). │ └── main.dart # (TD3->TD4) Point d'entrée, MultiProvider et correction FFI. └── pubspec.yaml # Fichier de dépendances.
-'''
+```bash
+.
+├── lib/
+│   ├── api/
+│   │   └── myapi.dart             # (TD2) Couche de données factice, lecture de 'assets/tasks.json'.
+│   ├── models/
+│   │   └── task.dart              # (TD2->TD4) Modèle métier avec fromJson/toMap.
+│   ├── repository/
+│   │   ├── settings_repository.dart # (TD3) Repository pour SharedPreferences (Thème).
+│   │   └── task_repository.dart   # (TD4) Repository pour SQLite (CRUD des Tâches).
+│   ├── UI/
+│   │   ├── add_task.dart          # (TD3) Widget simple pour ajouter une tâche (Remplacé par le formulaire en TD4).
+│   │   ├── card1.dart             # (TD3/TD4) Liste des tâches MVVM (Ecran1).
+│   │   ├── card2.dart             # (TD2) Ancienne liste des tâches (FutureBuilder, Ecran2).
+│   │   ├── card3.dart             # (TD2) Ancienne liste des tâches (FutureBuilder, Ecran3).
+│   │   ├── detail.dart            # (TD2) Écran de détail d'une tâche.
+│   │   ├── ecran_settings.dart    # (TD3) Écran des paramètres (EcranSettings).
+│   │   ├── home.dart              # (TD3/TD4) Widget principal, navigation (BottomBar/FAB).
+│   │   ├── mytheme.dart           # (TD3) Définition des thèmes Light et Dark.
+│   │   └── task_form_screen.dart  # (TD4) Formulaire CRUD (Ajout/Édition avancée des tâches).
+│   ├── ViewModel/
+│   │   ├── setting_view_model.dart  # (TD3) Logique métier du thème (ChangeNotifier).
+│   │   └── taskViewModel.dart     # (TD3/TD4) Logique métier des tâches (utilise TaskRepository en TD4).
+│   └── main.dart                  # (TD3/TD4) Point d'entrée, MultiProvider et correction FFI.
+└── pubspec.yaml                 # Fichier de dépendances.
 
 ## 🚀 Guide de Démarrage
 

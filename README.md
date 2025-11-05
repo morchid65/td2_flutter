@@ -1,64 +1,52 @@
-🎓 Projet Flutter : Gestionnaire de Tâches Persistant (TD2 à TD4)
-Ce projet est une application de gestion de tâches développée en Flutter. Il a été structuré pour illustrer l'évolution d'une architecture logicielle, allant d'une lecture de données locale à une implémentation robuste du pattern MVVM (Model-View-ViewModel) avec persistance via SQLite.
+# 🚀 Gestionnaire de Tâches Flutter : MVVM, Repository & SQLite (TD2 à TD4)
 
-🛠️ Stack Technique
-Framework : Flutter / Dart
+Ce projet est une application de gestion de tâches développée en Flutter/Dart. Il a servi de support pour mettre en œuvre une architecture logicielle moderne, en passant d'une simple lecture de données (TD2) à une implémentation complète du pattern **MVVM** avec une couche de **Repository** pour la **persistance SQLite** (TD4).
 
-Architecture : MVVM (Model-View-ViewModel)
+## 🛠️ Stack Technique
 
-Gestion d'État : provider
+| Composant | Technologie | Version Clé | Rôle dans le Projet |
+| :--- | :--- | :--- | :--- |
+| **Framework** | Flutter / Dart | `sdk: '>=3.9.0 <4.0.0'` | Développement cross-platform de l'application. |
+| **Architecture** | MVVM | N/A | Séparation stricte des responsabilités (View, ViewModel, Model). |
+| **Gestion d'État** | `provider` | `^6.1.1` | Rendre les ViewModels accessibles et notifiables par l'interface utilisateur. |
+| **Persistance Tâches** | `sqflite` / `path` | `^2.3.0` / `^1.8.3` | Stockage persistant des objets `Task` dans une base de données locale (TD4). |
+| **Persistance Thème**| `shared_preferences` | `^2.2.2` | Sauvegarde du réglage du Mode Sombre/Clair (TD3). |
+| **Compatibilité** | `sqflite_common_ffi` | `^2.3.0` | Solution d'initialisation conditionnelle de la DB pour les plateformes Desktop (Windows, Linux, macOS) dans `main.dart`. |
+| **UI** | `settings_ui` | `^2.0.2` | Affichage structuré de l'écran des paramètres. |
 
-Couche de Données : Repository Pattern (TaskRepository, SettingRepository)
+---
 
-Persistance Tâches : sqflite (SQLite)
+## 🗺️ Évolution de l'Architecture et des Fonctionnalités
 
-Persistance Thème : shared_preferences
+### 🎯 TD2 : Les Fondations (UI & API Factice)
 
-Compatibilité : sqflite_common_ffi (pour support Desktop)
+* **Modèle `Task` :** Définition de la structure de l'objet métier (`id`, `title`, `tags`, `nbhours`, `difficulty`, `description`, `color`) avec des méthodes utilitaires comme **`fromJson`**.
+* **Couche de Données Factice :** La classe **`MyAPI`** est implémentée pour lire les données des tâches à partir du fichier local **`assets/tasks.json`**, simulant l'interaction avec un backend.
+* **Affichage :** Les widgets `Ecran2` et `Ecran3` utilisent **`FutureBuilder`** pour consommer l'API de manière asynchrone et afficher les listes (`ListView.builder`).
+* **Détail :** Le widget **`Detail`** affiche les propriétés complètes de la `Task` sélectionnée.
 
-🗺️ Évolution du Projet
-TD2 : Fondations et API Factice
-Objectif : Mise en place des modèles (Task), de l'interface utilisateur de base, et de la navigation.
+### 🎯 TD3 : Passage au MVVM et Thème Persistant
 
-Implémentation : Les données des tâches sont chargées à partir d'un fichier JSON local (assets/tasks.json) via la classe MyAPI, simulant une source de données externe. L'affichage utilise FutureBuilder (card2.dart / card3.dart).
+* **MVVM avec Provider :** Migration vers le pattern MVVM :
+    * **`TaskViewModel` :** Gère la liste des tâches en mémoire (`late List<Task> liste`) et expose la méthode **`addTask(Task.newTask())`** et **`generateTasks()`**.
+    * **`SettingViewModel` :** Gère l'état `isDark` du thème.
+* **Repository Pattern (Paramètres) :** Introduction d'une couche de données pour les paramètres avec **`SettingRepository`** qui utilise **`shared_preferences`** pour sauvegarder et récupérer le choix du thème.
+* **UI Réactive :**
+    * Le widget **`Ecran1`** remplace l'ancien `FutureBuilder` et utilise **`context.watch<TaskViewModel>()`** pour réagir automatiquement aux changements de la liste en mémoire.
+    * Le widget **`EcranSettings`** utilise **`context.read/watch<SettingViewModel>()`** pour lire l'état initial et modifier le thème de manière persistante.
+    * Le bouton **FAB** sur la `Home` navigue vers **`AddTask`** qui appelle `context.read<TaskViewModel>().addTask()`.
 
-TD3 : Introduction du MVVM et Thème Persistant
-Objectif : Adopter une architecture réactive et gérer la persistance des paramètres.
+### 🎯 TD4 : Persistance Définitive (Repository Pattern & SQLite)
 
-Implémentation :
+* **Objectif :** Rendre les tâches persistantes. L'implémentation est mise à jour pour utiliser une base de données locale SQLite.
+* **`TaskRepository` :** Création de la classe **`TaskRepository`** pour encapsuler toute la logique d'accès à la DB (`tasks.db`), incluant :
+    * **`_initDB()`** : Création de la table `'tasks'` (avec les colonnes `id`, `title`, `tags`, `nbhours`, `difficulty`, `description`, `color` stockée en `INTEGER`).
+    * Implémentation des méthodes **CRUD** (`insertTask`, `getTasks`, `updateTask`, `deleteTask`).
+* **Mise à Jour du Modèle :** Le modèle **`Task`** est étendu avec **`toMap()`** et **`Task.fromMap()`** pour les besoins de sérialisation/désérialisation de `sqflite`.
+* **Mise à Jour du ViewModel :** Le **`TaskViewModel`** est refactorisé pour utiliser le `TaskRepository` au lieu de la liste en mémoire, assurant la persistance des données.
+* **Formulaire Avancé :** Remplacement de l'ancien `AddTask` par un **`TaskFormScreen`** utilisant un `Form` complet pour la saisie et l'édition des tâches. Le même écran gère l'**Ajout** (pas de `Task` passée) et l'**Édition** (une `Task` est passée).
+* **Correction FFI :** Ajout de la logique de compatibilité Desktop (`sqflite_common_ffi` et `databaseFactory = databaseFactoryFfi;`) dans **`main.dart`** pour garantir le fonctionnement du SQLite sur toutes les plateformes de développement.
 
-Création des ViewModels (TaskViewModel et SettingViewModel) et intégration de provider. L'UI (card1.dart) réagit aux changements via context.watch.
+---
 
-Mise en place du SettingRepository pour sauvegarder le choix du mode sombre/clair (isDark) en utilisant shared_preferences.
-
-Le bouton "Add Task" (add_task.dart) ajoute des tâches en mémoire (Task.newTask()).
-
-TD4 : Persistance Définitive (SQLite) et CRUD Complet
-Objectif : Rendre les données des tâches persistantes et finaliser les fonctionnalités CRUD.
-
-Implémentation :
-
-TaskRepository est créé, gérant la connexion et les requêtes SQLite (sqflite).
-
-Le TaskViewModel est refactorisé pour dépendre exclusivement du TaskRepository, assurant la Séparation des Préoccupations.
-
-Mise à jour du modèle Task avec les méthodes toMap() et Task.fromMap() pour la sérialisation/désérialisation de la base de données.
-
-Remplacement de l'ancien AddTask par un TaskFormScreen unique capable de gérer l'Ajout et l'Édition des tâches, ainsi que la Suppression (deleteTask).
-
-⚙️ Démarrage Rapide
-Cloner le dépôt.
-
-Installer les dépendances (incluant sqflite, path, et sqflite_common_ffi pour le support multiplateforme).
-
-Bash
-
-flutter pub get
-Lancer l'application.
-
-Bash
-
-flutter run
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏗️ Structure du Code

@@ -1,11 +1,17 @@
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart'; // Pour debugPrint
+
 class SettingRepository {
-  Future<bool> getSettings() async {
-    // Simule une lecture depuis une source de données
-    return Future.value(false);
+  static const THEME_KEY = "darkMode"; 
+
+  saveSettings(bool value) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool(THEME_KEY, value);
+    debugPrint("Thème sauvegardé : $value");
   }
 
-  void saveSettings(bool isDark) {
-    // Simule une sauvegarde
-    print("Thème sauvegardé : $isDark");
+  Future<bool> getSettings() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getBool(THEME_KEY) ?? false; 
   }
 }

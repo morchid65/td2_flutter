@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'UI/home.dart';
+import 'UI/mytheme.dart';
 import 'ViewModel/setting_view_model.dart';
-import 'mytheme.dart';
-import 'home.dart';
+import 'ViewModel/taskViewModel.dart'; 
 
 void main() {
-  runApp(MyTD2());
+  runApp(const MyTD2());
 }
 
 class MyTD2 extends StatelessWidget {
@@ -13,14 +15,28 @@ class MyTD2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => SettingViewModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) {
+            SettingViewModel settingViewModel = SettingViewModel();
+            return settingViewModel;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            TaskViewModel taskViewModel = TaskViewModel();
+            taskViewModel.generateTasks();
+            return taskViewModel;
+          },
+        )
+      ],
       child: Consumer<SettingViewModel>(
-        builder: (context, notifier, child) {
+        builder: (context, settingNotifier, child) {
           return MaterialApp(
-            theme: notifier.isDark ? MyTheme.dark() : MyTheme.light(),
-            title: 'TD2',
-            home: const Home(),
+            theme: settingNotifier.isDark ? MyTheme.dark() : MyTheme.light(),
+            title: 'TD3',
+            home: const Home(), 
           );
         },
       ),

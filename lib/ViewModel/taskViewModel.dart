@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart'; // Pour ChangeNotifier
-import '../modele/task.dart'; 
+import 'package:flutter/material.dart'; 
+import '../models/task.dart'; 
 
 class TaskViewModel extends ChangeNotifier {
   late List<Task> liste;
@@ -10,11 +10,11 @@ class TaskViewModel extends ChangeNotifier {
 
   void addTask(Task task) {
     liste.add(task);
-    notifyListeners();
+    notifyListeners(); 
   }
 
   void generateTasks() {
-    liste = Task.generateTask(5);
+    liste = Task.generateTask(50); 
     notifyListeners();
   }
 }

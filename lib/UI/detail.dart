@@ -38,3 +38,4 @@ class Detail extends StatelessWidget {
     );
   }
 }
+

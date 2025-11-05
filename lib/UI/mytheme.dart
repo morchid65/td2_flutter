@@ -77,6 +77,7 @@ class MyTheme {
         unselectedItemColor: Colors.black,
       ),
       textTheme: lightTextTheme,
+      scaffoldBackgroundColor: Colors.white, 
     );
   }
 
@@ -96,6 +97,7 @@ class MyTheme {
         unselectedItemColor: Colors.white,
       ),
       textTheme: darkTextTheme,
+      scaffoldBackgroundColor: Colors.grey[900], 
     );
   }
 }

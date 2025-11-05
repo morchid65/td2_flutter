@@ -50,3 +50,20 @@ Ce projet est une application de gestion de tâches développée en Flutter/Dart
 ---
 
 ## 🏗️ Structure du Code
+
+. ├── lib/ │ ├── api/ │ │ └── myapi.dart # (TD2) Lecture JSON factice. │ ├── models/ │ │ └── task.dart # (TD2->TD4) Modèle Task avec fromJson/toMap. │ ├── repository/ │ │ ├── settings_repository.dart # (TD3) Persistance du thème (SharedPreferences). │ │ └── task_repository.dart # (TD4) Persistance des tâches (SQLite). │ ├── UI/ │ │ ├── card1.dart # (TD3) Liste des tâches, utilise TaskViewModel. │ │ ├── detail.dart # (TD2) Affichage du détail d'une tâche. │ │ ├── ecran_settings.dart # (TD3) Écran paramètres et toggle de thème. │ │ ├── home.dart # (TD3->TD4) Navigation (BottomBar, FAB). │ │ ├── mytheme.dart # (TD3) Thèmes Light/Dark. │ │ └── task_form_screen.dart # (TD4) Formulaire CRUD pour Ajouter/Éditer. │ ├── ViewModel/ │ │ ├── setting_view_model.dart # (TD3) Logique métier du thème. │ │ └── taskViewModel.dart # (TD3->TD4) Logique métier des tâches (utilise TaskRepository). │ └── main.dart # (TD3->TD4) Point d'entrée, MultiProvider, Correction FFI. └── pubspec.yaml # Dépendances sqflite, provider, shared_preferences, etc.
+
+
+---
+
+## 🚀 Guide de Démarrage
+
+1.  **Cloner le dépôt.**
+2.  **Installer les dépendances :**
+    ```bash
+    flutter pub get
+    ```
+3.  **Lancer l'application :**
+    ```bash
+    flutter run
+    ```

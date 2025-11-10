@@ -1,43 +1,36 @@
+// lib/ViewModel/task_view_model.dart
 import 'package:flutter/material.dart'; 
-import 'package:td2_app/models/task.dart'; 
-import '../repository/task_repository.dart'; 
+import '../models/task.dart'; 
 
 class TaskViewModel extends ChangeNotifier {
-  List<Task> _liste = [];
-  final TaskRepository _repository = TaskRepository(); 
-
-  List<Task> get liste => _liste;
+  late List<Task> liste;
 
   TaskViewModel() {
-    loadTasks(); 
+    liste = [];
+    generateTasks(); 
   }
 
-  Future<void> loadTasks() async {
-    _liste = await _repository.getTasks();
+  void addTask(Task task) {
+    liste.add(task);
+    notifyListeners(); 
+  }
+
+  void deleteTask(int id) {
+    liste.removeWhere((task) => task.id == id);
     notifyListeners();
   }
-
-  Future<void> addTask(Task task) async {
-    await _repository.insertTask(task);
-    await loadTasks(); 
-  }
-
-  Future<void> updateTask(Task task) async {
-    if (task.id != null) {
-      await _repository.updateTask(task);
-
-      final index = _liste.indexWhere((t) => t.id == task.id);
-      if (index != -1) {
-        _liste[index] = task;
-      }
+  
+  void updateTask(Task updatedTask) {
+    int index = liste.indexWhere((task) => task.id == updatedTask.id);
+    if (index != -1) {
+      liste[index] = updatedTask;
       notifyListeners();
     }
   }
 
-  Future<void> deleteTask(int id) async {
-    await _repository.deleteTask(id);
+  void generateTasks() {
 
-    _liste.removeWhere((task) => task.id == id);
+    liste = Task.generateTask(50);
     notifyListeners();
   }
 }

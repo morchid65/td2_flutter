@@ -4,18 +4,18 @@ Ce projet est une application de gestion de tâches développée en Flutter/Dart
 
 ---
 
-## 📊 Statistiques de Développement
+## ⚠️ Problème Connu : Fichier Asset (`tasks.json`)
 
-### ⏱️ Temps de Codage (WakaTime)
+Si vous rencontrez l'erreur "Unable to load asset: 'assets/json/tasks.json'" ou l'erreur de `Null` dans le terminal, assurez-vous que :
 
-Le temps passé sur ce projet est suivi via WakaTime.
+1.  Le dossier `assets/json/` est déclaré dans votre `pubspec.yaml`.
+2.  Votre méthode de désérialisation (`Task.fromMap`) gère correctement les valeurs `null` du JSON ou de la base de données.
 
-> **Note :** Le badge ci-dessous pointe directement vers le projet **Flutter Task Manager** pour un suivi précis.
+---
 
-| Composant | Statistique Clé | Intégration Recommandée (GitHub Readme Stats) |
-| :--- | :--- | :--- |
-| Activité Totale | Heures de codage brutes | [![wakatime](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/c046becb-7384-4b83-bc1b-a1bcc14a396b.svg)](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/c046becb-7384-4b83-bc1b-a1bcc14a396b) |
-| Langages | Dart, YAML, etc. | [![WakaTime: Langages](https://github-readme-stats.vercel.app/api/wakatime?username=morchid65&langs=true&hide_title=true&hide_border=true)](https://wakatime.com/@morchid65) |
+## 📊 Statistiques de Développement (WakaTime)
+
+Afin d'éviter d'exposer la **Clé API Privée** (`waka_...`), seule l'intégration directe du badge de projet WakaTime est conservée.
 
 <p align="center">
     [![wakatime](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/815baf83-8831-4339-845c-df23def8ea2b.svg)](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/815baf83-8831-4339-845c-df23def8ea2b)
@@ -61,7 +61,7 @@ Le temps passé sur ce projet est suivi via WakaTime.
 
 ---
 
-## 🏗️ Structure du Code
+## 🏗️ Structure du Code 
 
 Voici l'arborescence des fichiers clés, organisée par responsabilités architecturales :
 

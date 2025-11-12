@@ -1,55 +1,54 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:io'; 
+import 'dart:io';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-
 import 'ViewModel/home.dart';
-import 'UI/mytheme.dart';
-import 'ViewModel/setting_view_model.dart';
 import 'ViewModel/taskViewModel.dart'; 
+import 'ViewModel/setting_view_model.dart';
+import 'UI/mytheme.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void _initDatabaseFactoryForDesktop() {
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+
     sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi; 
+
+    databaseFactory = databaseFactoryFfi;
   }
-  runApp(MyTD2());
 }
 
-class MyTD2 extends StatelessWidget {
-  MyTD2({super.key});
+void main() {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  _initDatabaseFactoryForDesktop();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TaskViewModel()),
+        ChangeNotifierProvider(create: (_) => SettingViewModel()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) {
-            SettingViewModel settingViewModel = SettingViewModel();
-            return settingViewModel;
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (_) {
-            TaskViewModel taskViewModel = TaskViewModel();
-            taskViewModel.generateTasks(); 
-            return taskViewModel;
-          },
-        )
-      ],
-      child: Consumer<SettingViewModel>(
-        builder: (context, settingNotifier, child) {
-          return MaterialApp(
-            theme: settingNotifier.isDark ? MyTheme.dark() : MyTheme.light(),
-            title: 'TD3',
 
-            home: Home(), 
-          );
-        },
-      ),
+    final settingViewModel = context.watch<SettingViewModel>();
+    final bool isDark = settingViewModel.isDark;
+
+    return MaterialApp(
+      title: 'TD Flutter App',
+      debugShowCheckedModeBanner: false,
+
+      theme: isDark ? MyTheme.dark() : MyTheme.light(), 
+      home: const Home(),
     );
   }
 }

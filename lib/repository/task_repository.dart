@@ -1,10 +1,10 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../models/task.dart'; 
+import '../models/task.dart';
 
 class TaskRepository {
   static Database? _database;
-  static const String tableName = 'tasks';
+  static const String taskTable = 'tasks';
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -13,62 +13,60 @@ class TaskRepository {
   }
 
   Future<Database> _initDB() async {
-
-    final databasePath = await getDatabasesPath();
-
-    final path = join(databasePath, 'tasks.db');
-
-    return await openDatabase(
+    String path = join(await getDatabasesPath(), 'tasks_database.db');
+    return openDatabase(
       path,
-      version: 1, 
+      version: 1,
       onCreate: (db, version) {
-
         return db.execute(
-          'CREATE TABLE $tableName('
-          'id INTEGER PRIMARY KEY AUTOINCREMENT, '
-          'title TEXT, '
-          'tags TEXT, '
-          'nbhours INTEGER, '
-          'difficulty INTEGER, '
-          'description TEXT, '
-          'color INTEGER' 
-          ')',
+          '''
+          CREATE TABLE $taskTable(
+            id INTEGER PRIMARY KEY,
+            title TEXT,
+            tags TEXT,
+            nbhours INTEGER,
+            difficulty INTEGER,
+            description TEXT,
+            color TEXT
+          )
+          ''',
         );
       },
     );
   }
 
-  Future<int> insertTask(Task task) async {
+  Future<void> insertTask(Task task) async {
     final db = await database;
-
-    return await db.insert(tableName, task.toMap());
+    await db.insert(
+      taskTable,
+      task.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<List<Task>> getTasks() async {
     final db = await database;
-
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db.query(taskTable);
 
     return List.generate(maps.length, (i) {
       return Task.fromMap(maps[i]);
     });
   }
 
-  Future<int> updateTask(Task task) async {
+  Future<void> updateTask(Task task) async {
     final db = await database;
-
-    return await db.update(
-      tableName,
-      task.toMap(), 
+    await db.update(
+      taskTable,
+      task.toMap(),
       where: 'id = ?',
       whereArgs: [task.id],
     );
   }
 
-  Future<int> deleteTask(int id) async {
+  Future<void> deleteTask(int id) async {
     final db = await database;
-    return await db.delete(
-      tableName,
+    await db.delete(
+      taskTable,
       where: 'id = ?',
       whereArgs: [id],
     );

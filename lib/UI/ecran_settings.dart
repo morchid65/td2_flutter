@@ -1,44 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:settings_ui/settings_ui.dart'; 
-
-// Imports nécessaires
+import 'package:settings_ui/settings_ui.dart';
 import '../ViewModel/setting_view_model.dart';
-import 'mytheme.dart'; 
+import 'mytheme.dart';
 
-class EcranSettings extends StatelessWidget {
+class EcranSettings extends StatefulWidget {
+  const EcranSettings({super.key});
 
   @override
+  State<EcranSettings> createState() => _EcranSettingsState();
+}
+
+class _EcranSettingsState extends State<EcranSettings> {
+  @override
   Widget build(BuildContext context) {
-
-    final settingViewModel = context.watch<SettingViewModel>();
-    
-    return SettingsList(
-
-      lightTheme: SettingsThemeData(
-        settingsListBackground: MyTheme.light().scaffoldBackgroundColor,
-        settingsSectionBackground: MyTheme.light().scaffoldBackgroundColor,
-      ),
-      darkTheme: SettingsThemeData(
-        settingsListBackground: MyTheme.dark().scaffoldBackgroundColor,
-        settingsSectionBackground: MyTheme.dark().scaffoldBackgroundColor,
-      ),
-      sections: [
-        SettingsSection(
-          title: const Text('Thème'),
-          tiles: [
+    return Center(
+      child: SettingsList(
+        darkTheme: SettingsThemeData(
+            settingsListBackground: MyTheme.dark().scaffoldBackgroundColor,
+            settingsSectionBackground: MyTheme.dark().scaffoldBackgroundColor),
+        lightTheme: SettingsThemeData(
+            settingsListBackground: MyTheme.light().scaffoldBackgroundColor,
+            settingsSectionBackground: MyTheme.light().scaffoldBackgroundColor),
+        sections: [
+          SettingsSection(title: const Text('Theme'), tiles: [
             SettingsTile.switchTile(
-              initialValue: settingViewModel.isDark,
+              initialValue: context.watch<SettingViewModel>().isDark,
               onToggle: (bool value) {
-           
-                context.read<SettingViewModel>().isDark = value; 
+                context.read<SettingViewModel>().isDark = value;
               },
-              title: const Text('Mode sombre'),
+              title: const Text('Dark mode'),
               leading: const Icon(Icons.invert_colors),
             )
-          ],
-        )
-      ],
+          ])
+        ],
+      ),
     );
   }
 }

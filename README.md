@@ -4,36 +4,13 @@ Ce projet est une application de gestion de tâches développée en Flutter/Dart
 
 ---
 
-## ⚠️ Problème Connu : Fichier Asset (`tasks.json`)
-
-Si vous rencontrez l'erreur "Unable to load asset: 'assets/json/tasks.json'" ou l'erreur de `Null` dans le terminal, assurez-vous que :
-
-1.  Le dossier `assets/json/` est déclaré dans votre `pubspec.yaml`.
-2.  Votre méthode de désérialisation (`Task.fromMap`) gère correctement les valeurs `null` du JSON ou de la base de données.
-
----
-
 ## 📊 Statistiques de Développement (WakaTime)
 
-Afin d'éviter d'exposer la **Clé API Privée** (`waka_...`), seule l'intégration directe du badge de projet WakaTime est conservée.
+Ce badge reflète le temps de codage consacré spécifiquement à ce projet.
 
 <p align="center">
     [![wakatime](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/815baf83-8831-4339-845c-df23def8ea2b.svg)](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/815baf83-8831-4339-845c-df23def8ea2b)
 </p>
-
----
-
-## 🛠️ Stack Technique
-
-| Composant | Technologie | Version Clé | Rôle dans le Projet |
-| :--- | :--- | :--- | :--- |
-| **Framework** | Flutter / Dart | ``sdk: '>=3.0.0 <4.0.0'`` | Développement cross-platform de l'application. |
-| **Architecture** | MVVM | N/A | Séparation stricte des responsabilités (View, ViewModel, Model). |
-| **Gestion d'État** | `provider` | `^6.1.2` | Rendre les ViewModels accessibles et notifiables par l'interface utilisateur. |
-| **Persistance Tâches** | `sqflite` / `path` | `^2.3.2` / `^1.8.3` | Stockage persistant des objets `Task` dans une base de données locale (TD4). |
-| **Persistance Thème**| `shared_preferences` | `^2.2.3` | Sauvegarde du réglage du Mode Sombre/Clair (TD3). |
-| **Compatibilité** | `sqflite_common_ffi` | `^2.3.6` | **Solution Critique** d'initialisation conditionnelle de la DB pour les plateformes Desktop (Windows, Linux, macOS) dans `main.dart`. |
-| **UI** | `settings_ui` | `^2.1.0` | Affichage structuré de l'écran des paramètres. |
 
 ---
 
@@ -61,39 +38,14 @@ Afin d'éviter d'exposer la **Clé API Privée** (`waka_...`), seule l'intégrat
 
 ---
 
-## 🏗️ Structure du Code 
+## 🚀 Guide de Démarrage
 
-Voici l'arborescence des fichiers clés, organisée par responsabilités architecturales :
-
-```bash
-.
-├── lib/
-│   ├── api/
-│   │   └── myapi.dart             # Couche de données factice.
-│   ├── models/
-│   │   └── task.dart              # Modèle métier avec fromMap/toMap.
-│   ├── repository/
-│   │   ├── settings_repository.dart # Repository SharedPreferences.
-│   │   └── task_repository.dart   # Repository SQLite (CRUD).
-│   ├── UI/
-│   │   ├── card1.dart, card2.dart, card3.dart, card4.dart # Les écrans de l'application.
-│   │   ├── detail.dart, ecran_settings.dart, mytheme.dart
-│   │   └── task_form_screen.dart  # Formulaire CRUD avancé.
-│   ├── ViewModel/
-│   │   ├── setting_view_model.dart  # Logique métier du thème.
-│   │   └── taskViewModel.dart     # Logique métier des tâches (utilise TaskRepository).
-│   └── main.dart                  # Point d'entrée, MultiProvider et correction FFI.
-└── pubspec.yaml                 # Fichier de dépendances.
-🚀 Guide de Démarrage
-Cloner le dépôt.
-
-Installer les dépendances :
-
-Bash
-
-flutter pub get
-Lancer l'application :
-
-Bash
-
-flutter run
+1.  **Cloner le dépôt.**
+2.  **Installer les dépendances :**
+    ```bash
+    flutter pub get
+    ```
+3.  **Lancer l'application :**
+    ```bash
+    flutter run
+    ```

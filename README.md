@@ -62,21 +62,13 @@ Voici l'arborescence des fichiers clés, organisée par responsabilités archite
 │   └── main.dart                  # Point d'entrée, MultiProvider et correction FFI.
 └── pubspec.yaml                 # Fichier de dépendances.
 
-```
+## 🚀 Guide de Démarrage
 
+1. **Cloner le dépôt.**
+2. **Installer les dépendances :**
+   ```bash
+   flutter pub get
 
-🚀 Guide de Démarrage
-Cloner le dépôt.
-
-Installer les dépendances :
-
-```bash
-
-flutter pub get
-Lancer l'application :
-
-
-```
+  ```bash
 
 flutter run
-```

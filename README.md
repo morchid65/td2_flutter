@@ -9,7 +9,7 @@ Ce projet est une application de gestion de tâches développée en Flutter/Dart
 Ce badge reflète le temps de codage consacré spécifiquement à ce projet.
 
 <p align="center">
-    [![wakatime](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/815baf83-8831-4339-845c-df23def8ea2b.svg)](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/815baf83-8831-4339-845c-df23def8ea2b)
+    [![wakatime](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/c046becb-7384-4b83-bc1b-a1bcc14a396b.svg)](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/c046becb-7384-4b83-bc1b-a1bcc14a396b)
 </p>
 
 ---

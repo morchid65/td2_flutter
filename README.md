@@ -4,20 +4,22 @@ Ce projet est une application de gestion de tâches développée en Flutter/Dart
 
 ---
 
-## 📊 Statistiques de Développement (WakaTime)
+## 📊 Statistiques de Développement
 
-Le temps passé sur ce projet a été mesuré grâce à l'intégration de **WakaTime**. Ces tableaux de bord montrent l'activité de codage, la répartition des langages, et les éditeurs utilisés, soulignant l'engagement dans le développement de ce projet Flutter/Dart.
+### ⏱️ Temps de Codage (WakaTime)
 
-> **Note :** Les liens ci-dessous utilisent l'identifiant **`morchid65`** comme nom d'utilisateur WakaTime. **Veuillez remplacer toutes les occurrences de `morchid65` par votre nom d'utilisateur WakaTime réel** si celui-ci est différent, ainsi que le lien du badge si vous souhaitez suivre un projet spécifique.
+Le temps passé sur ce projet est suivi via WakaTime.
 
-| Composant | Statistique Clé | Intégration Recommandée |
+> **Note :** Le badge ci-dessous pointe directement vers le projet **Flutter Task Manager** pour un suivi précis.
+
+| Composant | Statistique Clé | Intégration Recommandée (GitHub Readme Stats) |
 | :--- | :--- | :--- |
 | Activité Totale | Heures de codage brutes | [![My WakaTime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=morchid65&layout=compact&hide_title=true&hide_border=true)](https://wakatime.com/@morchid65) |
 | Langages | Dart, YAML, etc. | [![WakaTime: Langages](https://github-readme-stats.vercel.app/api/wakatime?username=morchid65&langs=true&hide_title=true&hide_border=true)](https://wakatime.com/@morchid65) |
 
-### Exemple de Tableau de Bord (Badge de projet)
-
-![WakaTime Stats](https://wakatime.com/badge/user/VOTRE_CLE_API/project/VOTRE_ID_PROJET.svg)
+<p align="center">
+    [![wakatime](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/815baf83-8831-4339-845c-df23def8ea2b.svg)](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/815baf83-8831-4339-845c-df23def8ea2b)
+</p>
 
 ---
 

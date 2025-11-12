@@ -62,6 +62,8 @@ Voici l'arborescence des fichiers clés, organisée par responsabilités archite
 │   └── main.dart                  # Point d'entrée, MultiProvider et correction FFI.
 └── pubspec.yaml                 # Fichier de dépendances.
 
+```
+
 🚀 Guide de Démarrage
 Cloner le dépôt.
 

@@ -14,7 +14,7 @@ Le temps passé sur ce projet est suivi via WakaTime.
 
 | Composant | Statistique Clé | Intégration Recommandée (GitHub Readme Stats) |
 | :--- | :--- | :--- |
-| Activité Totale | Heures de codage brutes | [![My WakaTime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=morchid65&layout=compact&hide_title=true&hide_border=true)](https://wakatime.com/@morchid65) |
+| Activité Totale | Heures de codage brutes | [![wakatime](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/c046becb-7384-4b83-bc1b-a1bcc14a396b.svg)](https://wakatime.com/badge/user/3d07be02-2a28-4eec-96eb-751c50769ce3/project/c046becb-7384-4b83-bc1b-a1bcc14a396b) |
 | Langages | Dart, YAML, etc. | [![WakaTime: Langages](https://github-readme-stats.vercel.app/api/wakatime?username=morchid65&langs=true&hide_title=true&hide_border=true)](https://wakatime.com/@morchid65) |
 
 <p align="center">

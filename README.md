@@ -63,17 +63,20 @@ Voici l'arborescence des fichiers clés, organisée par responsabilités archite
 └── pubspec.yaml                 # Fichier de dépendances.
 
 ```
+```bash
 
 🚀 Guide de Démarrage
 Cloner le dépôt.
 
 Installer les dépendances :
 
-Bash
+```
 
 flutter pub get
 Lancer l'application :
 
-Bash
+
+```
 
 flutter run
+```

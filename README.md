@@ -8,16 +8,16 @@ Ce projet est une application de gestion de tâches développée en Flutter/Dart
 
 Le temps passé sur ce projet a été mesuré grâce à l'intégration de **WakaTime**. Ces tableaux de bord montrent l'activité de codage, la répartition des langages, et les éditeurs utilisés, soulignant l'engagement dans le développement de ce projet Flutter/Dart.
 
-> **Note :** Pour que ces tableaux apparaissent sur votre GitHub/GitLab, vous devez d'abord configurer WakaTime sur votre machine et y intégrer les liens d'images de vos tableaux de bord (Dashboard, Langages, etc.).
+> **Note :** Les liens ci-dessous utilisent l'identifiant **`morchid65`** comme nom d'utilisateur WakaTime. **Veuillez remplacer toutes les occurrences de `morchid65` par votre nom d'utilisateur WakaTime réel** si celui-ci est différent, ainsi que le lien du badge si vous souhaitez suivre un projet spécifique.
 
 | Composant | Statistique Clé | Intégration Recommandée |
 | :--- | :--- | :--- |
-| Activité Totale | Heures de codage brutes | `[![My WakaTime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=VOTRE_NOM_WAKATIME&layout=compact&hide_title=true&hide_border=true)](URL_WAKATIME)` |
-| Langages | Dart, YAML, etc. | `[![WakaTime: Langages](https://github-readme-stats.vercel.app/api/wakatime?username=VOTRE_NOM_WAKATIME&langs=true&hide_title=true&hide_border=true)](URL_WAKATIME)` |
+| Activité Totale | Heures de codage brutes | [![My WakaTime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=morchid65&layout=compact&hide_title=true&hide_border=true)](https://wakatime.com/@morchid65) |
+| Langages | Dart, YAML, etc. | [![WakaTime: Langages](https://github-readme-stats.vercel.app/api/wakatime?username=morchid65&langs=true&hide_title=true&hide_border=true)](https://wakatime.com/@morchid65) |
 
-### Exemple de Tableau de Bord (À remplacer par votre lien)
+### Exemple de Tableau de Bord (Badge de projet)
 
-`![WakaTime Stats](https://wakatime.com/badge/user/VOTRE_CLE_API/project/VOTRE_ID_PROJET.svg)`
+![WakaTime Stats](https://wakatime.com/badge/user/VOTRE_CLE_API/project/VOTRE_ID_PROJET.svg)
 
 ---
 
@@ -25,7 +25,7 @@ Le temps passé sur ce projet a été mesuré grâce à l'intégration de **Waka
 
 | Composant | Technologie | Version Clé | Rôle dans le Projet |
 | :--- | :--- | :--- | :--- |
-| **Framework** | Flutter / Dart | `sdk: '>=3.0.0 <4.0.0'` | Développement cross-platform de l'application. |
+| **Framework** | Flutter / Dart | ``sdk: '>=3.0.0 <4.0.0'`` | Développement cross-platform de l'application. |
 | **Architecture** | MVVM | N/A | Séparation stricte des responsabilités (View, ViewModel, Model). |
 | **Gestion d'État** | `provider` | `^6.1.2` | Rendre les ViewModels accessibles et notifiables par l'interface utilisateur. |
 | **Persistance Tâches** | `sqflite` / `path` | `^2.3.2` / `^1.8.3` | Stockage persistant des objets `Task` dans une base de données locale (TD4). |

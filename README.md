@@ -67,8 +67,9 @@ Voici l'arborescence des fichiers clés, organisée par responsabilités archite
 1. **Cloner le dépôt.**
 2. **Installer les dépendances :**
    ```bash
+
    flutter pub get
 
-  ```bash
+```bash
 
 flutter run

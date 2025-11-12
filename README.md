@@ -38,14 +38,26 @@ Ce badge reflète le temps de codage consacré spécifiquement à ce projet.
 
 ---
 
-## 🚀 Guide de Démarrage
+## 🏗️ Structure du Code
 
-1.  **Cloner le dépôt.**
-2.  **Installer les dépendances :**
-    ```bash
-    flutter pub get
-    ```
-3.  **Lancer l'application :**
-    ```bash
-    flutter run
-    ```
+Voici l'arborescence des fichiers clés, organisée par responsabilités architecturales :
+
+```bash
+.
+├── lib/
+│   ├── api/
+│   │   └── myapi.dart             # Couche de données factice.
+│   ├── models/
+│   │   └── task.dart              # Modèle métier avec fromMap/toMap.
+│   ├── repository/
+│   │   ├── settings_repository.dart # Repository SharedPreferences.
+│   │   └── task_repository.dart   # Repository SQLite (CRUD).
+│   ├── UI/
+│   │   ├── card1.dart, card2.dart, card3.dart, card4.dart # Les écrans de l'application.
+│   │   ├── detail.dart, ecran_settings.dart, mytheme.dart
+│   │   └── task_form_screen.dart  # Formulaire CRUD avancé.
+│   ├── ViewModel/
+│   │   ├── setting_view_model.dart  # Logique métier du thème.
+│   │   └── taskViewModel.dart     # Logique métier des tâches (utilise TaskRepository).
+│   └── main.dart                  # Point d'entrée, MultiProvider et correction FFI.
+└── pubspec.yaml                 # Fichier de dépendances.
